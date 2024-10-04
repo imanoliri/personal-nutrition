@@ -3,21 +3,23 @@ Personal nutrition study / app based on a macro- and micronutrient dataset of 87
 
 ## Finished Tools
 1. Dataset reading
-
-
-## Planned Tools
-- Dataset reading
     - Read dataset with pandas
     - Clean columns
     - Explode name columns
+2. - Dataset processing
+    - Divide in macros and micros
+
+
+## Planned Tools
 - Dataset processing
     - Simple metadata
-    - Divide in macros and micros
     - Add features
 - Dataset exploring
     - python dash application that let's the user explore the dataset
     - histograms
-    - 
+    - x-y plots
+    - 3D plots
+    - ...
 - Basic dataset study
     - Collect graphs with explorer and get conclusions from them
     - What food groups (names, labels, macro- and micro- compositions) are there?
