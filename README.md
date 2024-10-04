@@ -13,7 +13,7 @@ Personal nutrition study / app based on a macro- and micronutrient dataset of 87
     - histograms
     - x-y plots
     - 3D plots
-    - identify data points with hovering of the mouse to show name
+    - hover the mouse over a data point to show food item name
 
 
 ## Planned Tools
