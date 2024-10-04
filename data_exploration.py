@@ -48,11 +48,13 @@ def update_graph(var1, var2, var3):
 
     if var_bools == [True, True, False]:
         print("return scatter 2D")
-        fig = px.scatter(df, x=var1, y=var2)
+        fig = px.scatter(df, x=var1, y=var2, hover_name="name")
 
     if var_bools == [True, True, True]:
         print("return scatter 3D")
-        fig = px.scatter_3d(df, x=var1, y=var2, z=var3, width=800, height=800)
+        fig = px.scatter_3d(
+            df, x=var1, y=var2, z=var3, width=800, height=800, hover_name="name"
+        )
 
     if fig is not None:
         return fig
