@@ -6,7 +6,7 @@ Personal nutrition study / app based on a macro- and micronutrient dataset of 87
     - Read dataset with pandas
     - Clean columns
     - Explode name columns
-2. - Dataset processing
+2. Dataset processing
     - Divide in macros and micros
 
 
@@ -14,7 +14,7 @@ Personal nutrition study / app based on a macro- and micronutrient dataset of 87
 - Dataset processing
     - Simple metadata
     - Add features
-- Dataset exploring
+- Dataset exploration
     - python dash application that let's the user explore the dataset
     - histograms
     - x-y plots
