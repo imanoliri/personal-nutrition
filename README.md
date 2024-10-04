@@ -2,10 +2,11 @@
 Personal nutrition study / app based on a macro- and micronutrient dataset of 8788 food items from https://www.kaggle.com/datasets/gokulprasantht/nutrition-dataset?resource=download
 
 ## Finished Tools
-- (None)
+1. Dataset reading
+
 
 ## Planned Tools
-- Dataset reader
+- Dataset reading
     - Read dataset with pandas
     - Clean columns
     - Explode name columns
@@ -13,7 +14,7 @@ Personal nutrition study / app based on a macro- and micronutrient dataset of 87
     - Simple metadata
     - Divide in macros and micros
     - Add features
-- Dataset explorer
+- Dataset exploring
     - python dash application that let's the user explore the dataset
     - histograms
     - 
