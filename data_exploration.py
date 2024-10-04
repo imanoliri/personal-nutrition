@@ -51,7 +51,7 @@ def update_graph(var1, var2, var3):
 
     if var_bools == [True, True, True]:
         print("return scatter 3D")
-        fig = px.scatter_3d(df, x=var1, y=var2, z=var3)
+        fig = px.scatter_3d(df, x=var1, y=var2, z=var3, width=800, height=800)
 
     if fig is not None:
         return fig
