@@ -13,6 +13,7 @@ df = df.loc[:, [pd.IndexSlice["identifier", "name"], *cols_to_keep]]
 
 data_columns = df.columns.get_level_values(-1)
 df.columns = data_columns
+data_columns_to_select = [c for c in data_columns if c != "name"]
 
 
 print(f"... Dataset loaded: {df.shape}")
@@ -23,9 +24,9 @@ app = Dash()
 
 app.layout = [
     html.H1(children="Dataset Exploration", style={"textAlign": "center"}),
-    dcc.Dropdown(data_columns, id="dropdown-1"),
-    dcc.Dropdown(data_columns, id="dropdown-2"),
-    dcc.Dropdown(data_columns, id="dropdown-3"),
+    dcc.Dropdown(data_columns_to_select, id="dropdown-1"),
+    dcc.Dropdown(data_columns_to_select, id="dropdown-2"),
+    dcc.Dropdown(data_columns_to_select, id="dropdown-3"),
     dcc.Graph(id="graph-content"),
 ]
 
