@@ -11,14 +11,15 @@ cols_to_keep = pd.MultiIndex.from_product(
 )
 df = df.loc[:, [pd.IndexSlice["identifier", "name"], *cols_to_keep]]
 
+data_columns = df.columns.get_level_values(-1)
+df.columns = data_columns
+
 
 print(f"... Dataset loaded: {df.shape}")
 
 
 app = Dash()
 
-data_columns = df.columns.get_level_values(-1)
-df.columns = data_columns
 
 app.layout = [
     html.H1(children="Dataset Exploration", style={"textAlign": "center"}),
