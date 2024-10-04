@@ -56,10 +56,8 @@ class Dataset:
         df_name.name = ("identifier", "name")
 
         # Tags
-        df_tags = pd.DataFrame(df.name.str.split(",").tolist()).dropna()
+        df_tags = pd.DataFrame(df.name.str.split(",").tolist())
         df_tags.columns = pd.MultiIndex.from_product([["identifier"], df_tags.columns])
-        df_tags.insert(0, ("identifier", "name"), 9)
-        df_tags.loc[:, pd.IndexSlice["identifier", "name"]] = df.loc[:, "name"]
 
         # Identify columns as macro or micronutrients
         df_values = df.loc[:, [c != "name" for c in df.columns]]
