@@ -25,8 +25,9 @@ Personal nutrition study / app based on a macro- and micronutrient dataset of 87
         - ... 
     - ?
 - Dataset processing
-    - Simple metadata
-    - Add features
+    - Simple metadata (nr items, nr unique tags, )
+    - Remove features (alike foods, redundant variables...)
+    - Add features (?)
 - Menu summarizer
     - Total calories
     - Total macros
