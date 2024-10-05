@@ -104,8 +104,8 @@ def groups_from_pairs(pairs: List[Tuple[int]]) -> List[List[int]]:
         for agroup in alike_groups:
             if any(idp1 in agroup for idp1 in p1):
                 new_group = False
-                alike_group = agroup
-                continue
+                alike_group = np.append(agroup, p1)
+                break
 
         # Add other pairs to the group
         for p2 in pairs:
@@ -131,11 +131,10 @@ def get_nutrition_dataset_metadata(
 ):
 
     # Reduce data columns
+    macro_cols = ["total_fat", "protein", "carbohydrate"]
     cols_to_keep = pd.MultiIndex.from_product([["identifier"], df.identifier.columns])
     cols_to_keep = cols_to_keep.append(
-        pd.MultiIndex.from_product(
-            [["macro"], ["total_fat", "protein", "carbohydrate"]]
-        )
+        pd.MultiIndex.from_product([["macro"], macro_cols])
     )
     df = df.loc[:, cols_to_keep].copy(deep=True)
 
@@ -155,7 +154,22 @@ def get_nutrition_dataset_metadata(
 
     alike_groups = groups_from_pairs(dfs.iloc[:, :2].values)
 
-    return (unique_identifiers, dfc, dfs, alike_groups)
+    alike_foods_data = [
+        [
+            df.loc[ag]
+            .macro.loc[:, macro_cols]
+            .mean(axis=0)
+            .round(0)
+            .astype("int")
+            .tolist(),
+            ag.tolist(),
+        ]
+        for ag in alike_groups
+    ]
+
+    ids_to_remove = pd.Index(fid for ag in alike_groups for fid in ag[1:])
+
+    return (unique_identifiers, dfc, dfs, alike_groups, alike_foods_data, ids_to_remove)
 
 
 def report_nutrition_dataset_metadata(
@@ -165,6 +179,8 @@ def report_nutrition_dataset_metadata(
     dfc: pd.DataFrame,
     dfs: pd.DataFrame,
     alike_groups: List[np.ndarray],
+    alike_foods_data: List[np.ndarray],
+    ids_to_remove: pd.Index,
     consider_name_likeness: bool = False,
     consider_macro_difference: bool = True,
     name_likeness_threshold: float = 0.7,
@@ -200,17 +216,10 @@ def report_nutrition_dataset_metadata(
     alike_group_sizes = [len(ag) for ag in alike_groups]
     alike_foods = [
         [
-            "("
-            + ", ".join(
-                str(int(round(p, 0)))
-                for p in df.loc[ag[0]]
-                .macro.loc[["total_fat", "protein", "carbohydrate"]]
-                .tolist()
-            )
-            + ")",
+            "(" + ", ".join(str(s) for s in p) + ")",
             *df.loc[ag].identifier.name.tolist(),
         ]
-        for ag in alike_groups
+        for p, ag in alike_foods_data
     ]
 
     metadata_report.append(
